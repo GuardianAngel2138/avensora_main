@@ -23,9 +23,9 @@ const AboutSection = () => {
   }];
   
   const team = [{
-    name: "Abhinav Krisha S",
+    name: "Abhinav Krishna S",
     role: "Co-Founder & Lead Developer",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+    image: "https://images.unspla.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
     expertise: "Full-Stack Development, System Architecture"
   }, {
     name: "Sheesmon Varghese",
