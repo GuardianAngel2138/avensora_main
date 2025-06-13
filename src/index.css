@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -55,7 +54,7 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -84,13 +83,17 @@
   }
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border transition-colors duration-300;
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground font-inter transition-colors duration-300;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -98,22 +101,128 @@
   }
 }
 
-/* Custom scrollbar */
+/* Security: Disable text selection for sensitive UI elements */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Security: Hide dev tools context menu */
+.secure-content {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Security: Prevent drag and drop of sensitive elements */
+.no-drag {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+/* Enhanced responsive design for mobile-first approach */
+@layer components {
+  .text-responsive {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+
+  .heading-responsive {
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+
+  .card-responsive {
+    @apply p-4 sm:p-6 md:p-8;
+  }
+
+  .button-responsive {
+    @apply text-sm px-4 py-2 sm:px-6 sm:py-3;
+  }
+}
+
+@layer components {
+  .text-responsive {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+
+  .heading-responsive {
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+
+  .card-responsive {
+    @apply p-4 sm:p-6 md:p-8;
+  }
+
+  .button-responsive {
+    @apply text-sm px-4 py-2 sm:px-6 sm:py-3;
+  }
+}
+
+
+@layer components {
+  .text-responsive {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+
+  .heading-responsive {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  .card-responsive {
+    @apply p-4 sm:p-6 md:p-8;
+  }
+
+  .button-responsive {
+    @apply text-sm px-4 py-2 sm:text-base sm:px-6 sm:py-3 md:text-lg md:px-8 md:py-4;
+  }
+}
+
+
+/* Enhanced card layout utilities for better responsiveness */
+.card-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 300px;
+}
+
+@media (max-width: 640px) {
+  .card-content-wrapper {
+    min-height: 250px;
+  }
+}
+
+.card-content-body {
+  flex-grow: 1;
+}
+
+.card-content-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+/* Custom scrollbar with theme support */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  @apply bg-secondary;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 10px;
+  @apply bg-muted-foreground rounded-lg;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  @apply bg-foreground/70;
 }
 
 /* Smooth scroll behavior */
@@ -121,22 +230,27 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Simple gradient text - reduced animations */
+/* Enhanced gradient text with theme support */
 .gradient-text {
-  background: linear-gradient(45deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background: linear-gradient(45deg, hsl(var(--primary)) 0%, #764ba2 50%, #f093fb 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Reduced text animations - only essential ones with faster animation */
+/* Enhanced shimmer effect with theme support */
 .text-shimmer {
-  background: linear-gradient(90deg, #667eea 25%, #764ba2 50%, #f093fb 75%, #667eea 100%);
+  background: linear-gradient(90deg, 
+    hsl(var(--primary)) 25%, 
+    #764ba2 50%, 
+    #f093fb 75%, 
+    hsl(var(--primary)) 100%
+  );
   background-size: 400% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 12s infinite linear;
+  animation: shimmer 9s infinite linear;
 }
 
 @keyframes shimmer {
@@ -148,32 +262,34 @@ html {
   }
 }
 
-/* Text sparkle for key highlights */
+/* Dark theme aware sparkle effect */
 .text-sparkle {
-  background: linear-gradient(45deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  background: linear-gradient(45deg, 
+    hsl(var(--primary)) 0%, 
+    hsl(var(--secondary)) 50%, 
+    hsl(var(--accent)) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glassmorphism effect */
+/* Enhanced glassmorphism with theme support */
 .glass-effect {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  @apply bg-background/25 backdrop-blur-lg border border-border/50;
 }
 
-/* Enhanced hover glow effect */
+/* Enhanced hover glow with theme awareness */
 .hover-glow {
   transition: all 0.3s ease;
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
   transform: translateY(-2px);
 }
 
-/* Button shimmer effect on hover */
+/* Dark theme aware button shimmer */
 .button-shimmer {
   position: relative;
   overflow: hidden;
@@ -186,36 +302,57 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 1000ms ease;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary-foreground) / 0.4), transparent);
+  transition: left 600ms ease;
 }
 
 .button-shimmer:hover::before {
   left: 100%;
 }
 
-/* Mobile-optimized animations */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+/* Enhanced button animations */
+button {
+  transition: all 0.2s ease;
 }
 
-/* Enhanced mobile touch animations */
-@media (max-width: 768px) {
-  .hover-glow:active {
-    transform: scale(0.98);
-    box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
-  }
-  
-  button:active {
-    transform: scale(0.95);
-  }
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px hsl(var(--primary) / 0.2);
 }
 
-/* Float animation for backgroun elements */
+button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px hsl(var(--primary) / 0.15);
+}
+
+/* Theme-aware button focus states */
+button:focus:not(:disabled) {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Enhanced CTA button animations */
+.cta-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary-foreground) / 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+/* Float animation for background elements */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
@@ -229,68 +366,132 @@ html {
   animation: float 6s ease-in-out infinite;
 }
 
-/* Enhanced button animations */
-button {
-  transition: all 0.2s ease;
-}
-
-button:hover:not(:disabled) {
-  transform: translateY(-1px);
-}
-
-button:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-/* Form focus animations */
+/* Form focus animations with theme support */
 input:focus, textarea:focus, select:focus {
   transform: scale(1.02);
   transition: all 0.2s ease;
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
 }
 
-/* Card hover animations */
+/* Card hover animations with theme support */
 .card-hover {
   transition: all 0.3s ease;
 }
 
 .card-hover:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px hsl(var(--foreground) / 0.1);
 }
 
-/* CTA button enhanced animations */
-.cta-button {
-  position: relative;
-  overflow: hidden;
+/* Mobile-optimized animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-.cta-button::before {
-  content: '';
+/* Enhanced mobile touch animations with theme support */
+@media (max-width: 768px) {
+  .hover-glow:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.3);
+  }
+  
+  button:active {
+    transform: scale(0.95);
+  }
+  
+  /* Mobile-specific card adjustments */
+  .card-hover:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  /* Improve touch targets on mobile */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Theme transition animations */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Enhanced section background transitions */
+section {
+  transition: background-color 0.3s ease;
+}
+
+/* Button variants with improved theme support */
+.btn-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+}
+
+.btn-outline {
+  @apply border border-border bg-background hover:bg-accent hover:text-accent-foreground;
+}
+
+/* Security: Prevent content selection for sensitive areas */
+.price-display, .badge, .security-content {
+  @apply no-select;
+}
+
+/* Responsive grid improvements */
+@media (max-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Enhanced accessibility for screen readers */
+.sr-only {
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.cta-button:hover::before {
-  left: 100%;
+/* Security: Hide potentially sensitive information from screenshots */
+.sensitive-content {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
-/* Card flex layout for button alignment */
-.card-content-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+/* Performance optimization for animations */
+.will-change-transform {
+  will-change: transform;
 }
 
-.card-content-body {
-  flex-grow: 1;
+.will-change-opacity {
+  will-change: opacity;
 }
-
-.card-content-footer {
-  margin-top: auto;
-}
-

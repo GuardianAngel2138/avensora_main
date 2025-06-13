@@ -4,10 +4,10 @@ import AnimatedCounter from './AnimatedCounter';
 
 const PortfolioCounters = () => {
   const stats = [
-    { number: 10, suffix: '+', label: 'Projects Completed' },
+    { number: 500, suffix: '+', label: 'Projects Completed' },
     { number: 98, suffix: '%', label: 'Client Satisfaction' },
-    { number: 10, suffix: '+', label: 'Happy Clients' },
-    { number: 1, suffix: '+', label: 'Awards Won' }
+    { number: 150, suffix: '+', label: 'Happy Clients' },
+    { number: 50, suffix: '+', label: 'Awards Won' }
   ];
 
   return (

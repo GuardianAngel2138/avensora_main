@@ -11,7 +11,7 @@ const GlobalCounters: React.FC<GlobalCountersProps> = ({
   showIcons = true
 }) => {
   const counters = [{
-    end: 10,
+    end: 500,
     suffix: '+',
     label: 'Projects Completed',
     icon: '🚀',
@@ -23,13 +23,13 @@ const GlobalCounters: React.FC<GlobalCountersProps> = ({
     icon: '⭐',
     color: 'text-green-600'
   }, {
-    end: 5,
+    end: 50,
     suffix: '+',
     label: 'Team Members',
     icon: '👥',
     color: 'text-purple-600'
   }, {
-    end: 2,
+    end: 5,
     suffix: '+',
     label: 'Years Experience',
     icon: '📅',
